@@ -34,7 +34,7 @@ const InputField = styled(InputBase)`
 `;
 
 const ClipIcon = styled(AttachFile)`
-    transform: 'rotate(220deg)'
+    transform: rotate(220deg)
 `;
 
 
@@ -43,8 +43,10 @@ const Footer = () => {
     return (
         <Container>
             <EmojiEmotionsOutlined />
+            <ClipIcon />
             <Search>
-                <InputField placeholder='Type a message' />
+                <InputField
+                    placeholder='Type a message' />
             </Search>
             <Mic />
         </Container>
