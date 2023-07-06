@@ -44,7 +44,8 @@ const ChatDialog = () => {
                     <Menu />
                 </LeftComponent>
                 <RightComponent>
-                    <EmptyChat />
+                    {/* <EmptyChat /> */}
+                    <ChatBox />
                 </RightComponent>
             </Component>
         </Dialog>
