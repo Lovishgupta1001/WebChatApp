@@ -4,6 +4,8 @@ import { Box, Typography, styled } from '@mui/material';
 
 import { AccountContext } from '../../../context/AccountProvider';
 
+import { newMessage } from '../../../service/api';
+
 import Message from './Message';
 import Footer from './Footer';
 
@@ -34,9 +36,9 @@ const Messages = ({ person, conversation }) => {
     const [value, setValue] = useState('');
     const { account } = useContext(AccountContext);
 
-    const sendText = (e) => {
+    const sendText = async (e) => {
         const code = e.keyCode || e.which;
-        if (code == 13) {
+        if (code === 13) {
             let message = {
                 senderId: account.sub,
                 receiverId: person.sub,
@@ -44,7 +46,8 @@ const Messages = ({ person, conversation }) => {
                 type: 'text',
                 text: value
             }
-            console.log(message);
+            await newMessage(message);
+            setValue('');
         }
     }
 
@@ -58,6 +61,7 @@ const Messages = ({ person, conversation }) => {
             <Footer
                 sendText={sendText}
                 setValue={setValue}
+                value={value}
             />
         </Wrapper>
     )
