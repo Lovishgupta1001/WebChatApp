@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { EmojiEmotionsOutlined, AttachFile, Mic } from '@mui/icons-material';
 import { Box, styled, InputBase } from '@mui/material';
@@ -38,15 +38,19 @@ const ClipIcon = styled(AttachFile)`
 `;
 
 
-const Footer = () => {
+const Footer = ({ sendText }) => {
 
+    const { text, setText } = useState('');
     return (
         <Container>
             <EmojiEmotionsOutlined />
             <ClipIcon />
             <Search>
                 <InputField
-                    placeholder='Type a message' />
+                    placeholder='Type a message'
+                    onChange={(e) => setText(e.target.value)}
+                    onKeyPress={(e) => sendText(e)}
+                />
             </Search>
             <Mic />
         </Container>

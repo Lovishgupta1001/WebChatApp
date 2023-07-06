@@ -1,7 +1,8 @@
 
-
+import { useContext } from 'react';
 import { Box, Typography, styled } from '@mui/material';
 
+import { AccountContext } from '../../../context/AccountProvider';
 
 import Message from './Message';
 import Footer from './Footer';
@@ -28,15 +29,30 @@ const Container = styled(Box)`
     padding: 1px 80px;
 `;
 
-const Messages = () => {
+const Messages = ({ person }) => {
+
+    const { account } = useContext(AccountContext);
+
+    const sendText = (e) => {
+        const code = e.keyCode || e.which;
+        if (code == 13) {
+            let message = {
+                senderId: account.sub,
+                receiverId: person.sub,
+                // conversationId: 
+            }
+        }
+    }
+
 
     return (
 
         <Wrapper>
             <Component>
-                
+
             </Component>
-            <Footer 
+            <Footer
+                sendText={sendText}
             />
         </Wrapper>
     )
