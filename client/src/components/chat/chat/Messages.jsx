@@ -34,13 +34,16 @@ const Container = styled(Box)`
 const Messages = ({ person, conversation }) => {
 
     const [value, setValue] = useState('');
+
+    const [messages, setMessages] = useState([]);
+
     const { account } = useContext(AccountContext);
 
     useEffect(() => {
         const getMessageDetails = async () => {
             let data = await getMessages(conversation._id);
-            // setMessages(data);
-            console.log(data);
+            setMessages(data);
+            // console.log(data);
         }
         conversation._id && getMessageDetails();
     }, [person._id, conversation._id])
@@ -65,7 +68,11 @@ const Messages = ({ person, conversation }) => {
 
         <Wrapper>
             <Component>
-
+                {
+                    messages && messages.map(message => (
+                        <Message message={message} />
+                    ))
+                }
             </Component>
             <Footer
                 sendText={sendText}
