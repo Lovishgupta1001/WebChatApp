@@ -13,10 +13,10 @@ export const newConversation = async (request, response) => {
         const newConversation = new Conversation({
             members: [senderId, receiverId]
         })
-        newConversation.save();
+        await newConversation.save();
         return response.status(200).json('conversation saved successfully');
     }
     catch (error) {
         return response.status(500).json(error.message);
     }
-}
+} 
