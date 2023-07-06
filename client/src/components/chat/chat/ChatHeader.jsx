@@ -42,14 +42,14 @@ const Status = styled(Typography)`
 
 
 
-const ChatHeader = () => {
+const ChatHeader = ({ person }) => {
 
     return (
         <Header>
-            <Image src={defaultProfilePicture} alt="display picture" />
+            <Image src={person.picture} alt="display picture" />
             <Box>
-                <Name>Name</Name>
-                <Status>Status Online</Status>
+                <Name>{person.name}</Name>
+                <Status>Offline</Status>
             </Box>
             <RightContainer>
                 <Search />
