@@ -1,5 +1,5 @@
 
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Box, Typography, styled } from '@mui/material';
 
 import { AccountContext } from '../../../context/AccountProvider';
@@ -29,8 +29,9 @@ const Container = styled(Box)`
     padding: 1px 80px;
 `;
 
-const Messages = ({ person }) => {
+const Messages = ({ person, conversation }) => {
 
+    const [value, setValue] = useState('');
     const { account } = useContext(AccountContext);
 
     const sendText = (e) => {
@@ -39,8 +40,11 @@ const Messages = ({ person }) => {
             let message = {
                 senderId: account.sub,
                 receiverId: person.sub,
-                // conversationId: 
+                conversationId: conversation._id,
+                type: 'text',
+                text: value
             }
+            console.log(message);
         }
     }
 
@@ -53,6 +57,7 @@ const Messages = ({ person }) => {
             </Component>
             <Footer
                 sendText={sendText}
+                setValue={setValue}
             />
         </Wrapper>
     )
