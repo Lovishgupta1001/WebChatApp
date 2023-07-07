@@ -2,6 +2,8 @@
 
 import { Box, Typography, styled } from "@mui/material";
 
+import { formatDate } from '../../../utils/common-utils'
+
 const Wrapper = styled(Box)`
     background: #FFFFFF;
     padding: 5px;
@@ -40,14 +42,10 @@ const Time = styled(Typography)`
 export const Message = ({ message }) => {
 
     return (
-        <Box>
-            <Typography>
-                {message.text}
-            </Typography>
-            <Typography>
-                {message.createdAt}
-            </Typography>
-        </Box>
+        <Own>
+            <Text>{message.text}</Text>
+            <Time>{formatDate(message.createdAt)}</Time>
+        </Own>
     )
 }
 
