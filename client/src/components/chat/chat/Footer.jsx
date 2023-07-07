@@ -1,9 +1,9 @@
-
+import { useEffect } from 'react';
 
 import { EmojiEmotionsOutlined, AttachFile, Mic } from '@mui/icons-material';
 import { Box, styled, InputBase } from '@mui/material';
 
-// import { uploadFile } from '../../../service/api';
+import { uploadFile } from '../../../service/api';
 
 const Container = styled(Box)`
     height: 55px;
@@ -39,6 +39,19 @@ const ClipIcon = styled(AttachFile)`
 
 
 const Footer = ({ sendText, setValue, value, file, setFile }) => {
+
+    useEffect(() => {
+        const getImage = async () => {
+            if (file) {
+                const data = new FormData();
+                data.append("name", file.name);
+                data.append("file", file);
+
+                await uploadFile(data);
+            }
+        }
+        getImage();
+    }, [file])
 
     const onFileChange = (e) => {
         // console.log(e);
