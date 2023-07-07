@@ -15,6 +15,6 @@ route.post('/conversation/add', newConversation);
 route.post('/conversation/get', getConversation);
 
 route.post('/message/add', newMessage);
-route.get('/message/get:id', getMessages);
+route.get('/message/get/:id', getMessages);
 
 export default route; 
