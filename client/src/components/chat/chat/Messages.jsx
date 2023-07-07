@@ -37,6 +37,8 @@ const Messages = ({ person, conversation }) => {
 
     const [messages, setMessages] = useState([]);
 
+    const [newMessageFlag, setNewMessageFlag] = useState(false);
+
     const { account } = useContext(AccountContext);
 
     useEffect(() => {
@@ -46,7 +48,7 @@ const Messages = ({ person, conversation }) => {
             // console.log(data);
         }
         conversation._id && getMessageDetails();
-    }, [person._id, conversation._id])
+    }, [person._id, conversation._id, newMessageFlag])
 
     const sendText = async (e) => {
         const code = e.keyCode || e.which;
@@ -60,6 +62,7 @@ const Messages = ({ person, conversation }) => {
             }
             await newMessage(message);
             setValue('');
+            setNewMessageFlag(prev => !prev);
         }
     }
 
@@ -70,7 +73,9 @@ const Messages = ({ person, conversation }) => {
             <Component>
                 {
                     messages && messages.map(message => (
-                        <Message message={message} />
+                        <Container>
+                            <Message message={message} />
+                        </Container>
                     ))
                 }
             </Component>

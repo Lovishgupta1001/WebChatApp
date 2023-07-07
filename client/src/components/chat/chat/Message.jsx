@@ -1,8 +1,11 @@
 
+import { useContext } from "react";
 
 import { Box, Typography, styled } from "@mui/material";
 
 import { formatDate } from '../../../utils/common-utils'
+
+import { AccountContext } from "../../../context/AccountProvider";
 
 const Wrapper = styled(Box)`
     background: #FFFFFF;
@@ -41,11 +44,22 @@ const Time = styled(Typography)`
 
 export const Message = ({ message }) => {
 
+    const { account } = useContext(AccountContext);
     return (
-        <Own>
-            <Text>{message.text}</Text>
-            <Time>{formatDate(message.createdAt)}</Time>
-        </Own>
+        <>
+            { 
+                account.sub === message.senderId ?
+                    <Own>
+                        <Text>{message.text}</Text>
+                        <Time>{formatDate(message.createdAt)}</Time>
+                    </Own>
+                    :
+                    <Wrapper>
+                        <Text>{message.text}</Text>
+                        <Time>{formatDate(message.createdAt)}</Time>
+                    </Wrapper>
+            }
+        </>
     )
 }
 
