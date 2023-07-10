@@ -44,12 +44,14 @@ const Status = styled(Typography)`
 
 const ChatHeader = ({ person }) => {
 
+    const { activeUsers } = useContext(AccountContext);
+
     return (
         <Header>
             <Image src={person.picture} alt="display picture" />
             <Box>
                 <Name>{person.name}</Name>
-                <Status>Offline</Status>
+                <Status>{activeUsers?.find(user => user.sub === person.sub) ? 'online' : 'offline'}</Status>
             </Box>
             <RightContainer>
                 <Search />
